@@ -1,0 +1,26 @@
+[
+    {
+        "model": "bookings.Profile", 
+        "pk": 1,
+        "fields": {
+            "name": "John Doe",
+            "phone_number": "9048356756"
+        }
+    },
+    {
+        "model": "bookings.Profile", 
+        "pk": 2,
+        "fields": {
+            "name": "Jane Smith",
+            "phone_number": "9856243913"
+        }
+    },
+    {
+        "model": "bookings.Profile", 
+        "pk": 3,
+        "fields": {
+            "name": "Alice Johnson",
+            "phone_number": "8456317691"
+        }
+    }
+]

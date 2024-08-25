@@ -1,0 +1,21 @@
+[
+    {
+      "model": "bookings.venue",
+      "pk": 1,
+      "fields": {
+        "name": "Court 1",
+        "opening_time": "06:00:00",
+        "closing_time": "22:00:00"
+      }
+    },
+    {
+      "model": "bookings.venue",
+      "pk": 2,
+      "fields": {
+        "name": "Court 2",
+        "opening_time": "05:00:00",
+        "closing_time": "22:00:00"
+      }
+    }
+  ]
+  

@@ -1,0 +1,143 @@
+openapi: 3.0.0
+info:
+  title: Badminton Venue Booking API
+  description: This is a simple booking system for badminton venues.
+  version: 1.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/EDWINRAJU-d7a/API/1.0.0
+  - url: http://127.0.0.1:8000
+paths:
+  /book:
+    post:
+      summary: Book a badminton venue.
+      description: Allows a user to book a time slot for a badminton venue. It prevents double bookings and overlapping time slots.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                venue:
+                  type: integer
+                  description: The ID of the venue.
+                  example: 2
+                user:
+                  type: integer
+                  description: The ID of the user.
+                  example: 1
+                date:
+                  type: string
+                  format: date
+                  description: The date of the booking (YYYY-MM-DD).
+                  example: "2024-08-27"
+                start_time:
+                  type: string
+                  format: time
+                  description: The start time of the booking (HH:MM:SS).
+                  example: "17:20:00"
+                end_time:
+                  type: string
+                  format: time
+                  description: The end time of the booking (HH:MM:SS).
+                  example: "18:20:00"
+      responses:
+        '200':
+          description: Booking successfully created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Booking successfully created."
+        '400':
+          description: Time slot conflict.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "This time slot is already booked."
+                  available_slots:
+                    type: array
+                    description: The available time slots for that venue.
+                    items:
+                      type: array
+                      items:
+                        type: string
+                      example: ["05:00:00", "13:00:00"]
+  /performance:
+    get:
+      summary: Get venue performance rankings.
+      description: Provides a ranking for venues based on the number of bookings per month. Venues are categorized into A, B, C, or D based on booking counts.
+      responses:
+        '200':
+          description: Monthly venue performance.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  August:
+                    Category C: ["Court 2"]
+                    Category D: ["Court 1"]
+                  September:
+                    Category D: ["Court 2"]
+components:
+  schemas:
+    Booking:
+      type: object
+      properties:
+        venue:
+          type: integer
+          description: The ID of the venue.
+          example: 2
+        user:
+          type: integer
+          description: The ID of the user.
+          example: 1
+        date:
+          type: string
+          format: date
+          description: The date of the booking (YYYY-MM-DD).
+          example: "2024-08-27"
+        start_time:
+          type: string
+          format: time
+          description: The start time of the booking (HH:MM:SS).
+          example: "17:20:00"
+        end_time:
+          type: string
+          format: time
+          description: The end time of the booking (HH:MM:SS).
+          example: "18:20:00"
+    Performance:
+      type: object
+      properties:
+        August:
+          type: object
+          properties:
+            Category C:
+              type: array
+              items:
+                type: string
+                example: "Court 2"
+            Category D:
+              type: array
+              items:
+                type: string
+                example: "Court 1"
+        September:
+          type: object
+          properties:
+            Category D:
+              type: array
+              items:
+                type: string
+                example: "Court 2"
